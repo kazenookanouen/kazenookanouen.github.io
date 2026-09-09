@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>取扱商品 | 風の丘農園</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --soil:  #2E2016;
+  --green: #5C7A4E;
+  --cream: #F7F2E8;
+  --straw: #D4B483;
+  --white: #FFFFFF;
+  --muted: #7A6E62;
+  --serif: 'Noto Serif JP', serif;
+  --sans:  'Noto Sans JP', sans-serif;
+}
+body { font-family: var(--sans); background: var(--cream); color: var(--soil); line-height: 1.8; }
+
+header {
+  background: var(--soil);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6%; height: 68px;
+  position: sticky; top: 0; z-index: 100;
+}
+.logo { font-family: var(--serif); font-size: 1.1rem; color: var(--cream); letter-spacing: 0.12em; text-decoration: none; display: block; }
+.logo span { display: block; font-size: 0.6rem; color: var(--straw); letter-spacing: 0.2em; font-weight: 400; margin-top: 2px; }
+nav { display: flex; gap: 2rem; }
+nav a { font-size: 0.82rem; color: rgba(247,242,232,0.7); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
+nav a:hover { color: var(--straw); }
+.menu-btn { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+.menu-btn span { display: block; width: 24px; height: 2px; background: var(--cream); border-radius: 2px; }
+.sp-nav { display: none; flex-direction: column; background: var(--soil); padding: 1rem 6%; }
+.sp-nav a { color: rgba(247,242,232,0.8); text-decoration: none; font-size: 0.9rem; letter-spacing: 0.1em; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.sp-nav.open { display: flex; }
+
+/* ページヘッダー */
+.page-header {
+  background: var(--soil);
+  padding: 60px 6% 50px;
+  text-align: center;
+}
+.page-header h1 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--cream);
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+}
+.page-header p {
+  font-size: 0.85rem;
+  color: var(--straw);
+  letter-spacing: 0.1em;
+}
+
+/* 商品グリッド */
+.section { padding: 60px 6%; max-width: 1140px; margin: 0 auto; }
+
+.category-title {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  color: var(--soil);
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--straw);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.product-card {
+  background: var(--white);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(46,32,22,0.07);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(46,32,22,0.13);
+}
+.product-card img {
+  width: 100%; aspect-ratio: 1; object-fit: cover; display: block;
+}
+.product-card .ph {
+  width: 100%; aspect-ratio: 1;
+  background: linear-gradient(135deg, #e8e0d0, #d0c8b0);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+  color: var(--muted); font-size: 0.75rem; letter-spacing: 0.08em;
+}
+.product-card .ph::before {
+  content: "+";
+  font-size: 2rem; color: var(--straw); line-height: 1;
+}
+.product-body {
+  padding: 0.9rem 1rem 1.1rem;
+}
+.product-body h3 {
+  font-family: var(--serif);
+  font-size: 0.92rem;
+  color: var(--soil);
+  margin-bottom: 3px;
+  letter-spacing: 0.05em;
+}
+.product-vol {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+/* 戻るボタン */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  margin-bottom: 2rem;
+  transition: color 0.2s;
+}
+.back-btn:hover { color: var(--soil); }
+.back-btn::before { content: "←"; }
+
+footer { background: #1a120a; padding: 2rem 6%; text-align: center; }
+footer p { font-size: 0.7rem; color: rgba(247,242,232,0.3); letter-spacing: 0.12em; }
+
+@media (max-width: 768px) {
+  nav { display: none; }
+  .menu-btn { display: flex; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+}
+@media (max-width: 480px) {
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="https://kazenookanouen.github.io/" class="logo">風の丘農園<span>JKS CONTRACT FARM</span></a>
+  <nav>
+    <a href="https://kazenookanouen.github.io/#about">農園について</a>
+    <a href="https://kazenookanouen.github.io/products.html">取扱商品</a>
+    <a href="https://kazenookanouen.github.io/#contact">お問い合わせ</a>
+  </nav>
+  <button class="menu-btn" onclick="toggleMenu()" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<div class="sp-nav" id="spNav">
+  <a href="https://kazenookanouen.github.io/#about" onclick="toggleMenu()">農園について</a>
+  <a href="https://kazenookanouen.github.io/products.html" onclick="toggleMenu()">取扱商品</a>
+  <a href="https://kazenookanouen.github.io/#contact" onclick="toggleMenu()">お問い合わせ</a>
+</div>
+
+<div class="page-header">
+  <h1>取扱商品</h1>
+  <p>無農薬・無化学肥料で育てた、風の丘農園の恵み</p>
+</div>
+
+<div class="section">
+  <a href="https://kazenookanouen.github.io/" class="back-btn">トップページに戻る</a>
+
+  <!-- ===== 麦・穀物 ===== -->
+  <div class="category-title">🌾 麦・穀物</div>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <img src="https://kazenookanouen.github.io/product-mugi.jpeg" alt="プレミアムもち麦">
+      <div class="product-body">
+        <h3>プレミアムもち麦</h3>
+        <p class="product-vol">200g</p>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://kazenookanouen.github.io/product-udon.jpeg" alt="風の丘うどん">
+      <div class="product-body">
+        <h3>風の丘うどん</h3>
+        <p class="product-vol">200g</p>
+      </div>
+    </div>
+
+    <!-- 追加商品①：画像は product-mugi2.jpeg などのファイル名でGitHubにアップ -->
+    <div class="product-card">
+      <div class="ph">写真を追加</div>
+      <div class="product-body">
+        <h3>商品名を入力</h3>
+        <p class="product-vol">○○g</p>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="ph">写真を追加</div>
+      <div class="product-body">
+        <h3>商品名を入力</h3>
+        <p class="product-vol">○○g</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== 大豆・加工品 ===== -->
+  <div class="category-title">🫘 大豆・加工品</div>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <img src="https://kazenookanouen.github.io/product-kinako.jpeg" alt="風の丘きな粉">
+      <div class="product-body">
+        <h3>風の丘きな粉</h3>
+        <p class="product-vol">150g</p>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="ph">写真を追加</div>
+      <div class="product-body">
+        <h3>商品名を入力</h3>
+        <p class="product-vol">○○g</p>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="ph">写真を追加</div>
+      <div class="product-body">
+        <h3>商品名を入力</h3>
+        <p class="product-vol">○○g</p>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="ph">写真を追加</div>
+      <div class="product-body">
+        <h3>商品名を入力</h3>
+        <p class="product-vol">○○g</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== その他 ===== -->
+  <div class="category-title">🥬 その他</div>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <div class="ph">写真を追加</div>
+      <div class="product-body">
+        <h3>商品名を入力</h3>
+        <p class="product-vol">○○g</p>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="ph">写真を追加</div>
+      <div class="product-body">
+        <h3>商品名を入力</h3>
+        <p class="product-vol">○○g</p>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="ph">写真を追加</div>
+      <div class="product-body">
+        <h3>商品名を入力</h3>
+        <p class="product-vol">○○g</p>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="ph">写真を追加</div>
+      <div class="product-body">
+        <h3>商品名を入力</h3>
+        <p class="product-vol">○○g</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 風の丘農園 （株）風の丘農園　千葉県成田市郷部1353　Tel: 0476-23-3039</p>
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById('spNav').classList.toggle('open');
+}
+</script>
+</body>
+</html>
