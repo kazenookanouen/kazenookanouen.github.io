@@ -19,7 +19,6 @@
 }
 body { font-family: var(--sans); background: var(--cream); color: var(--soil); line-height: 1.8; }
 
-/* ヘッダー */
 header {
   background: var(--soil);
   display: flex; align-items: center; justify-content: space-between;
@@ -31,15 +30,12 @@ header {
 nav { display: flex; gap: 2rem; }
 nav a { font-size: 0.82rem; color: rgba(247,242,232,0.7); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
 nav a:hover { color: var(--straw); }
-
-/* ハンバーガー（SP用） */
 .menu-btn { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-.menu-btn span { display: block; width: 24px; height: 2px; background: var(--cream); border-radius: 2px; transition: 0.3s; }
-.sp-nav { display: none; flex-direction: column; background: var(--soil); padding: 1rem 6%; gap: 0; }
+.menu-btn span { display: block; width: 24px; height: 2px; background: var(--cream); border-radius: 2px; }
+.sp-nav { display: none; flex-direction: column; background: var(--soil); padding: 1rem 6%; }
 .sp-nav a { color: rgba(247,242,232,0.8); text-decoration: none; font-size: 0.9rem; letter-spacing: 0.1em; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
 .sp-nav.open { display: flex; }
 
-/* ヒーロー */
 .hero {
   position: relative; min-height: 88vh;
   display: flex; align-items: flex-end; padding: 0 6% 8%;
@@ -51,8 +47,7 @@ nav a:hover { color: var(--straw); }
   background-size: cover; background-position: center 50%;
 }
 .hero-bg::after {
-  content: '';
-  position: absolute; inset: 0;
+  content: ''; position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(20,12,4,0.88) 0%, rgba(20,12,4,0.35) 55%, transparent 100%);
 }
 .hero-content { position: relative; z-index: 1; max-width: 600px; }
@@ -80,31 +75,26 @@ nav a:hover { color: var(--straw); }
 .btn-straw { background: var(--straw); color: var(--soil); font-weight: 500; }
 .btn-straw:hover { background: #c4a060; }
 
-/* こだわり帯 */
 .values-band {
   background: var(--soil); padding: 28px 6%;
   display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;
 }
-.value-item { text-align: center; color: var(--cream); }
+.value-item { text-align: center; }
 .value-item .icon { font-size: 1.3rem; margin-bottom: 6px; display: block; }
 .value-item p { font-size: 0.75rem; letter-spacing: 0.12em; color: var(--straw); }
 
-/* セクション */
 .section { padding: 80px 6%; max-width: 1140px; margin: 0 auto; }
 .section-head { margin-bottom: 2.5rem; }
 .section-head h2 { font-family: var(--serif); font-size: clamp(1.4rem, 3vw, 2rem); color: var(--soil); letter-spacing: 0.08em; margin-bottom: 0.5rem; }
 .section-head p { font-size: 0.85rem; color: var(--muted); }
 
-/* 農園について */
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 .about-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 2px; display: block; }
 .about-text h2 { font-family: var(--serif); font-size: clamp(1.4rem, 2.5vw, 1.9rem); color: var(--soil); letter-spacing: 0.08em; margin-bottom: 1.2rem; line-height: 1.6; }
 .about-text p { font-size: 0.88rem; color: var(--muted); line-height: 2.1; margin-bottom: 1rem; }
 .badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0; }
 .badge { font-size: 0.73rem; border: 1px solid var(--green); color: var(--green); padding: 4px 14px; border-radius: 100px; letter-spacing: 0.08em; }
-.link-arrow { font-size: 0.85rem; color: var(--soil); text-decoration: none; border-bottom: 1px solid var(--straw); padding-bottom: 2px; }
 
-/* 写真フィーチャー帯 */
 .harvest-band {
   position: relative; height: 420px; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
@@ -114,22 +104,41 @@ nav a:hover { color: var(--straw); }
 .harvest-caption { position: relative; z-index: 1; text-align: center; }
 .harvest-caption p { font-family: var(--serif); font-size: clamp(1.2rem, 3vw, 1.8rem); color: var(--white); letter-spacing: 0.15em; line-height: 1.8; }
 
-/* 写真ギャラリー */
-.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 2rem; }
+.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
 .gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
 
-/* お問い合わせ */
+/* 商品カード */
+.products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.product-card {
+  background: var(--white); border-radius: 2px; overflow: hidden;
+  box-shadow: 0 2px 12px rgba(46,32,22,0.07);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.product-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(46,32,22,0.13); }
+.product-card img {
+  width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block;
+  background: #eee;
+}
+.product-body { padding: 1.2rem 1.4rem 1.6rem; }
+.product-body h3 { font-family: var(--serif); font-size: 1rem; color: var(--soil); margin-bottom: 4px; letter-spacing: 0.06em; }
+.product-vol { font-size: 0.78rem; color: var(--muted); }
+.product-desc { font-size: 0.82rem; color: var(--muted); margin-top: 8px; line-height: 1.7; }
+.product-tag {
+  display: inline-block; font-size: 0.68rem;
+  background: var(--cream); color: var(--green);
+  border: 1px solid var(--green); padding: 2px 10px;
+  border-radius: 2px; letter-spacing: 0.08em; margin-bottom: 8px;
+}
+
 .contact-band { background: var(--green); padding: 80px 6%; text-align: center; }
 .contact-band h2 { font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--white); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
 .contact-band p { font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 2rem; }
 
-/* フッター */
 footer { background: #1a120a; padding: 2.5rem 6%; text-align: center; }
 footer p { font-size: 0.7rem; color: rgba(247,242,232,0.3); letter-spacing: 0.12em; }
 
 .sep { border: none; border-top: 1px solid rgba(46,32,22,0.1); max-width: 1140px; margin: 0 auto; }
 
-/* フェードイン */
 .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .fade-in.visible { opacity: 1; transform: none; }
 
@@ -141,9 +150,11 @@ footer p { font-size: 0.7rem; color: rgba(247,242,232,0.3); letter-spacing: 0.12
   .about-grid { grid-template-columns: 1fr; gap: 2rem; }
   .values-band { gap: 2rem; }
   .harvest-band { height: 280px; }
+  .products-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
   .gallery { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 480px) {
+  .products-grid { grid-template-columns: 1fr; }
   .gallery { grid-template-columns: 1fr; }
 }
 </style>
@@ -167,7 +178,6 @@ footer p { font-size: 0.7rem; color: rgba(247,242,232,0.3); letter-spacing: 0.12
   <a href="#contact" onclick="toggleMenu()">お問い合わせ</a>
 </div>
 
-<!-- ヒーロー：麦畑 -->
 <div class="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
@@ -179,7 +189,6 @@ footer p { font-size: 0.7rem; color: rgba(247,242,232,0.3); letter-spacing: 0.12
   </div>
 </div>
 
-<!-- こだわり帯 -->
 <div class="values-band">
   <div class="value-item"><span class="icon">🌿</span><p>無農薬栽培</p></div>
   <div class="value-item"><span class="icon">🌾</span><p>化学肥料不使用</p></div>
@@ -187,7 +196,6 @@ footer p { font-size: 0.7rem; color: rgba(247,242,232,0.3); letter-spacing: 0.12
   <div class="value-item"><span class="icon">🌱</span><p>自然栽培</p></div>
 </div>
 
-<!-- 農園について -->
 <div id="about" class="section fade-in">
   <div class="about-grid">
     <img class="about-img" src="https://kazenookanouen.github.io/field2.jpeg" alt="農園の風景">
@@ -205,7 +213,6 @@ footer p { font-size: 0.7rem; color: rgba(247,242,232,0.3); letter-spacing: 0.12
   </div>
 </div>
 
-<!-- 収穫写真フィーチャー帯 -->
 <div class="harvest-band fade-in">
   <img src="https://kazenookanouen.github.io/harvest.jpeg" alt="収穫した野菜">
   <div class="harvest-caption">
@@ -213,8 +220,7 @@ footer p { font-size: 0.7rem; color: rgba(247,242,232,0.3); letter-spacing: 0.12
   </div>
 </div>
 
-<!-- ギャラリー -->
-<div class="section fade-in" style="padding-top: 40px; padding-bottom: 40px;">
+<div class="section fade-in" style="padding-top:40px; padding-bottom:40px;">
   <div class="gallery">
     <img src="https://kazenookanouen.github.io/field1.jpeg" alt="大豆畑">
     <img src="https://kazenookanouen.github.io/field3.jpeg" alt="ネギ畑">
@@ -224,53 +230,61 @@ footer p { font-size: 0.7rem; color: rgba(247,242,232,0.3); letter-spacing: 0.12
 
 <hr class="sep">
 
-<!-- 商品 -->
 <div id="products" class="section fade-in">
   <div class="section-head">
     <h2>取扱商品</h2>
     <p>自然の恵みをそのままに、丁寧に仕上げた季節の品々</p>
   </div>
-  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:1.5rem;">
-    <div style="background:#fff; border-radius:2px; overflow:hidden;">
-      <div style="background: linear-gradient(135deg,#c4a060,#a07840); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.5); font-size:0.8rem; letter-spacing:0.1em;">商品写真</div>
-      <div style="padding:1.2rem 1.4rem 1.6rem;">
-        <h3 style="font-family:var(--serif); font-size:1rem; color:var(--soil); margin-bottom:4px;">風の丘うどん</h3>
-        <p style="font-size:0.78rem; color:var(--muted);">200g</p>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <img src="https://kazenookanouen.github.io/product-mugi.jpeg" alt="プレミアムもち麦">
+      <div class="product-body">
+        <span class="product-tag">人気商品</span>
+        <h3>プレミアムもち麦</h3>
+        <p class="product-vol">200g</p>
+        <p class="product-desc">アントシアニンとβ-グルカンを豊富に含む、完全無農薬・無化学肥料の幻のもち麦です。</p>
       </div>
     </div>
-    <div style="background:#fff; border-radius:2px; overflow:hidden;">
-      <div style="background: linear-gradient(135deg,#d4c890,#b8a860); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.5); font-size:0.8rem; letter-spacing:0.1em;">商品写真</div>
-      <div style="padding:1.2rem 1.4rem 1.6rem;">
-        <h3 style="font-family:var(--serif); font-size:1rem; color:var(--soil); margin-bottom:4px;">プレミアムもち麦</h3>
-        <p style="font-size:0.78rem; color:var(--muted);">200g</p>
+
+    <div class="product-card">
+      <img src="https://kazenookanouen.github.io/product-kinako.jpeg" alt="風の丘きな粉">
+      <div class="product-body">
+        <span class="product-tag">おすすめ</span>
+        <h3>風の丘きな粉</h3>
+        <p class="product-vol">150g</p>
+        <p class="product-desc">千葉県産大豆を使用。添加物・着色料なしの、香り豊かなきな粉です。</p>
       </div>
     </div>
-    <div style="background:#fff; border-radius:2px; overflow:hidden;">
-      <div style="background: linear-gradient(135deg,#8a6840,#6a4820); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.5); font-size:0.8rem; letter-spacing:0.1em;">商品写真</div>
-      <div style="padding:1.2rem 1.4rem 1.6rem;">
-        <h3 style="font-family:var(--serif); font-size:1rem; color:var(--soil); margin-bottom:4px;">風の丘きな粉</h3>
-        <p style="font-size:0.78rem; color:var(--muted);">150g</p>
+
+    <div class="product-card">
+      <img src="https://kazenookanouen.github.io/product-udon.jpeg" alt="風の丘うどん">
+      <div class="product-body">
+        <span class="product-tag">自家製</span>
+        <h3>風の丘うどん</h3>
+        <p class="product-vol">200g</p>
+        <p class="product-desc">自家栽培の小麦と自然塩だけで作った、無農薬・無化学肥料のうどんです。</p>
       </div>
     </div>
+
   </div>
 </div>
 
-<!-- お問い合わせ -->
 <div id="contact" class="contact-band fade-in">
   <h2>お問い合わせ</h2>
-  <p>商品・農園見学・JKS契約についてはお気軽にご連絡ください</p>
-  <a href="mailto:info@kazenookanouen.com" class="btn btn-straw">メールでお問い合わせ</a>
+  <p>商品・農園見学・JKS契約についてはお気軽にご連絡ください<br>
+  📞 0476-23-3039</p>
+  <a href="mailto:info@kazenookanouen.com" class="btn btn-straw" style="margin-top:0.5rem;">メールでお問い合わせ</a>
 </div>
 
 <footer>
-  <p>© 2026 風の丘農園 JKS契約農場 All rights reserved.</p>
+  <p>© 2026 風の丘農園 （株）風の丘農園　千葉県成田市郷部1353　Tel: 0476-23-3039</p>
 </footer>
 
 <script>
 function toggleMenu() {
   document.getElementById('spNav').classList.toggle('open');
 }
-// スクロールフェードイン
 (function() {
   var els = document.querySelectorAll('.fade-in');
   var obs = new IntersectionObserver(function(entries) {
@@ -278,7 +292,6 @@ function toggleMenu() {
   }, {threshold: 0.1});
   els.forEach(function(el) { obs.observe(el); });
 })();
-// スムーススクロール
 document.querySelectorAll('a[href^="#"]').forEach(function(a) {
   a.addEventListener('click', function(e) {
     var t = document.querySelector(this.getAttribute('href'));
